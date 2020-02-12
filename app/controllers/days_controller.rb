@@ -15,7 +15,10 @@ class DaysController < ApplicationController
 
   # POST /days
   def create
-    @day = Day.new(day_params)
+  
+    @day = Day.new(date: Time.new, calories: day_params[:calories], user_id: day_params[:user_id])
+    # @day = Day.new(day_params)
+    byebug
 
     if @day.save
       render json: @day, status: :created, location: @day
@@ -46,6 +49,6 @@ class DaysController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def day_params
-      params.require(:day).permit(:date)
+      params.require(:day).permit(:date, :calories, :user_id)
     end
 end

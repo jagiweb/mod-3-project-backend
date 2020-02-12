@@ -4,12 +4,16 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
   # GET /users/1
   def show
+    # if @user.days.find_by(days: params[:date]) == Time.new 
+      
+    #   @calories = user.days.calories
+    #   render json: @calories
+    # end
     render json: @user
   end
 
@@ -23,6 +27,15 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
   end
+
+  def authenticate 
+    @user = User.where(password_digest: params[:password_digest], email: params[:email]) 
+    if @user
+    render json: @user
+    else
+      console.log('dasdadadada')
+    end
+  end 
 
   # PATCH/PUT /users/1
   def update
@@ -46,6 +59,10 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :email, :password_digest, :age, :sex, :height, :weight)
+      params.require(:user).permit(:username, :email, :password_digest, :age, :sex, :height, :weight, :bmr)
     end
+
+    def authenticate_params
+      params.require(:user).permit(:email, :password_digest)
+    end 
 end
