@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2020_02_11_223206) do
   end
 
   create_table "foods", force: :cascade do |t|
-    t.integer "date_id", null: false
+    t.integer "day_id", null: false
     t.string "name"
     t.integer "calories"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["date_id"], name: "index_foods_on_date_id"
+    t.index ["day_id"], name: "index_foods_on_day_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,5 +44,5 @@ ActiveRecord::Schema.define(version: 2020_02_11_223206) do
   end
 
   add_foreign_key "days", "users"
-  add_foreign_key "foods", "dates"
+  add_foreign_key "foods", "days"
 end

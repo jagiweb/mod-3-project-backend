@@ -18,7 +18,8 @@ class DaysController < ApplicationController
   
     @day = Day.new(date: Time.new, calories: day_params[:calories], user_id: day_params[:user_id])
     # @day = Day.new(day_params)
-    @user = User.find(@day.user_id)
+
+
     if @day.save
       render json: @user, status: :created, location: @user
     else

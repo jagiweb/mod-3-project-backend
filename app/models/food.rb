@@ -1,3 +1,3 @@
 class Food < ApplicationRecord
-  belongs_to :date
+  belongs_to :day
 end
