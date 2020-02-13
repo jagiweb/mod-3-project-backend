@@ -1,11 +1,11 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :days, :username, :age, :sex, :bmr, :weight, :height, :email, :password_digest
-
-  # def days 
-  #   self.days.map do |day|
-  #     {id: day.id
-  #       calories: day.calories, 
-  #      date: day.date,
+  attributes :id, :username, :age, :sex, :bmr, :weight, :height, :email, :password_digest
+  has_many :days
+  # def foods 
+  #   self.days.foods.map do |food|
+  #     {id: food.id,
+  #       calories: food.calories, 
+  #      name: food.name,
   #     }
   #   end 
   # end 
