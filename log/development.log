@@ -21178,3 +21178,281 @@ Processing by FoodsController#create as JSON
 Completed 201 Created in 14ms (Views: 2.2ms | ActiveRecord: 2.7ms | Allocations: 4061)
 
 
+Started POST "/users/authenticate" for ::1 at 2020-02-13 18:41:41 +0000
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#authenticate as JSON
+  Parameters: {"email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]", "user"=>{"email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."password_digest" = ? AND "users"."email" = ?[0m  [["password_digest", "p1"], ["email", "mariola@gmail.com"]]
+  ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mDay Load (1.2ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mFood Load (1.8ms)[0m  [1m[34mSELECT "foods".* FROM "foods" WHERE "foods"."day_id" = ?[0m  [["day_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (44.13ms)
+Completed 500 Internal Server Error in 96ms (ActiveRecord: 6.4ms | Allocations: 22389)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: foods.day_id):
+  
+app/controllers/users_controller.rb:34:in `authenticate'
+Started POST "/users/authenticate" for ::1 at 2020-02-13 18:41:58 +0000
+Processing by UsersController#authenticate as JSON
+  Parameters: {"email"=>"javier@gmail.com", "password_digest"=>"[FILTERED]", "user"=>{"email"=>"javier@gmail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."password_digest" = ? AND "users"."email" = ?[0m  [["password_digest", "p1"], ["email", "javier@gmail.com"]]
+  ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mDay Load (0.2ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mFood Load (0.6ms)[0m  [1m[34mSELECT "foods".* FROM "foods" WHERE "foods"."day_id" = ?[0m  [["day_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (7.31ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.0ms | Allocations: 3756)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: foods.day_id):
+  
+app/controllers/users_controller.rb:34:in `authenticate'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200211095032)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "password_digest" varchar, "age" integer, "sex" varchar, "height" integer, "weight" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200211095032"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateDays (20200211095430)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "days" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "date" date, "calories" float, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9a520c0e8f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_days_on_user_id" ON "days" ("user_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200211095430"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateFoods (20200211095628)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "foods" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "day_id" integer NOT NULL, "name" varchar, "calories" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9bfb803bfb"
+FOREIGN KEY ("day_id")
+  REFERENCES "days" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_foods_on_day_id" ON "foods" ("day_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200211095628"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddCaloriesToUsers (20200211223206)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "bmr" float[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200211223206"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-13 18:42:25.144503"], ["updated_at", "2020-02-13 18:42:25.144503"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users/" for ::1 at 2020-02-13 18:42:47 +0000
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as JSON
+  Parameters: {"username"=>"Mariola", "email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"Female", "weight"=>"60", "height"=>"168", "bmr"=>1341, "user"=>{"username"=>"Mariola", "email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"Female", "height"=>"168", "weight"=>"60", "bmr"=>1341}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mariola@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "age", "sex", "height", "weight", "created_at", "updated_at", "bmr") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "Mariola"], ["email", "mariola@gmail.com"], ["password_digest", "p1"], ["age", 32], ["sex", "Female"], ["height", 168], ["weight", 60], ["created_at", "2020-02-13 18:42:47.602261"], ["updated_at", "2020-02-13 18:42:47.602261"], ["bmr", 1341.0]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mDay Load (0.2ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:25:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (45.03ms)
+Completed 201 Created in 103ms (Views: 74.5ms | ActiveRecord: 4.2ms | Allocations: 17882)
+
+
+Started POST "/days/" for ::1 at 2020-02-13 18:42:47 +0000
+Processing by DaysController#create as JSON
+  Parameters: {"calories"=>1341, "user_id"=>1, "day"=>{"calories"=>1341, "user_id"=>1}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mDay Create (0.9ms)[0m  [1m[32mINSERT INTO "days" ("date", "calories", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["date", "2020-02-13"], ["calories", 1341.0], ["user_id", 1], ["created_at", "2020-02-13 18:42:47.715394"], ["updated_at", "2020-02-13 18:42:47.715394"]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.11ms)
+Completed 201 Created in 32ms (Views: 5.4ms | ActiveRecord: 3.6ms | Allocations: 8020)
+
+
+Started POST "/users/authenticate" for ::1 at 2020-02-13 18:44:10 +0000
+Processing by UsersController#authenticate as JSON
+  Parameters: {"email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]", "user"=>{"email"=>"mariola@gmail.com", "password_digest"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."password_digest" = ? AND "users"."email" = ?[0m  [["password_digest", "p1"], ["email", "mariola@gmail.com"]]
+  ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mDay Load (0.2ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers]   [1m[36mFood Load (0.2ms)[0m  [1m[34mSELECT "foods".* FROM "foods" WHERE "foods"."day_id" = ?[0m  [["day_id", 1]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:34:in `authenticate'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (28.63ms)
+Completed 200 OK in 32ms (Views: 29.9ms | ActiveRecord: 1.1ms | Allocations: 6750)
+
+
+Started POST "/users/" for ::1 at 2020-02-13 18:45:14 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"username"=>"Javier", "email"=>"javier@gmail.com", "password_digest"=>"[FILTERED]", "age"=>"29", "sex"=>"male", "weight"=>"98", "height"=>"180", "bmr"=>2067, "user"=>{"username"=>"Javier", "email"=>"javier@gmail.com", "password_digest"=>"[FILTERED]", "age"=>"29", "sex"=>"male", "height"=>"180", "weight"=>"98", "bmr"=>2067}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "javier@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "age", "sex", "height", "weight", "created_at", "updated_at", "bmr") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "Javier"], ["email", "javier@gmail.com"], ["password_digest", "p1"], ["age", 29], ["sex", "male"], ["height", 180], ["weight", 98], ["created_at", "2020-02-13 18:45:14.279082"], ["updated_at", "2020-02-13 18:45:14.279082"], ["bmr", 2067.0]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mDay Load (1.6ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 2]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:25:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (12.66ms)
+Completed 201 Created in 33ms (Views: 12.9ms | ActiveRecord: 5.7ms | Allocations: 4853)
+
+
+Started POST "/days/" for ::1 at 2020-02-13 18:45:14 +0000
+Processing by DaysController#create as JSON
+  Parameters: {"calories"=>2067, "user_id"=>2, "day"=>{"calories"=>2067, "user_id"=>2}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mDay Create (5.0ms)[0m  [1m[32mINSERT INTO "days" ("date", "calories", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["date", "2020-02-13"], ["calories", 2067.0], ["user_id", 2], ["created_at", "2020-02-13 18:45:14.359020"], ["updated_at", "2020-02-13 18:45:14.359020"]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.08ms)
+Completed 201 Created in 24ms (Views: 0.7ms | ActiveRecord: 12.7ms | Allocations: 3360)
+
+
+Started POST "/users/" for ::1 at 2020-02-13 18:46:07 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"username"=>"sahara91", "email"=>"s@mail.com", "password_digest"=>"[FILTERED]", "age"=>"20", "sex"=>"male", "weight"=>"90", "height"=>"190", "bmr"=>2069, "user"=>{"username"=>"sahara91", "email"=>"s@mail.com", "password_digest"=>"[FILTERED]", "age"=>"20", "sex"=>"male", "height"=>"190", "weight"=>"90", "bmr"=>2069}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "s@mail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "age", "sex", "height", "weight", "created_at", "updated_at", "bmr") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "sahara91"], ["email", "s@mail.com"], ["password_digest", "p1"], ["age", 20], ["sex", "male"], ["height", 190], ["weight", 90], ["created_at", "2020-02-13 18:46:07.848495"], ["updated_at", "2020-02-13 18:46:07.848495"], ["bmr", 2069.0]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mDay Load (0.3ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 3]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:25:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (4.84ms)
+Completed 201 Created in 20ms (Views: 5.5ms | ActiveRecord: 2.9ms | Allocations: 4852)
+
+
+Started POST "/days/" for ::1 at 2020-02-13 18:46:07 +0000
+Processing by DaysController#create as JSON
+  Parameters: {"calories"=>2069, "user_id"=>3, "day"=>{"calories"=>2069, "user_id"=>3}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mDay Create (0.5ms)[0m  [1m[32mINSERT INTO "days" ("date", "calories", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["date", "2020-02-13"], ["calories", 2069.0], ["user_id", 3], ["created_at", "2020-02-13 18:46:07.902050"], ["updated_at", "2020-02-13 18:46:07.902050"]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.1ms)
+Completed 201 Created in 13ms (Views: 1.0ms | ActiveRecord: 2.7ms | Allocations: 3360)
+
+
+Started POST "/users/" for ::1 at 2020-02-13 18:46:30 +0000
+Processing by UsersController#create as JSON
+  Parameters: {"username"=>"wdad", "email"=>"wdad@m.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"male", "weight"=>"60", "height"=>"190", "bmr"=>1586, "user"=>{"username"=>"wdad", "email"=>"wdad@m.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"male", "height"=>"190", "weight"=>"60", "bmr"=>1586}}
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "wdad@m.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "age", "sex", "height", "weight", "created_at", "updated_at", "bmr") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "wdad"], ["email", "wdad@m.com"], ["password_digest", "p1"], ["age", 32], ["sex", "male"], ["height", 190], ["weight", 60], ["created_at", "2020-02-13 18:46:30.171309"], ["updated_at", "2020-02-13 18:46:30.171309"], ["bmr", 1586.0]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (2.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mDay Load (0.3ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 4]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:25:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (9.33ms)
+Completed 201 Created in 25ms (Views: 10.0ms | ActiveRecord: 4.2ms | Allocations: 4830)
+
+
+Started POST "/days/" for ::1 at 2020-02-13 18:46:30 +0000
+Processing by DaysController#create as JSON
+  Parameters: {"calories"=>1586, "user_id"=>4, "day"=>{"calories"=>1586, "user_id"=>4}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mDay Create (1.2ms)[0m  [1m[32mINSERT INTO "days" ("date", "calories", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["date", "2020-02-13"], ["calories", 1586.0], ["user_id", 4], ["created_at", "2020-02-13 18:46:30.238248"], ["updated_at", "2020-02-13 18:46:30.238248"]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (8.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Class (0.09ms)
+Completed 201 Created in 26ms (Views: 1.4ms | ActiveRecord: 11.6ms | Allocations: 3360)
+
+
+Started POST "/users/" for ::1 at 2020-02-13 18:51:20 +0000
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as JSON
+  Parameters: {"username"=>"topopor1", "email"=>"chacha@chacha.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"male", "weight"=>"60", "height"=>"190", "bmr"=>1586, "user"=>{"username"=>"topopor1", "email"=>"chacha@chacha.com", "password_digest"=>"[FILTERED]", "age"=>"32", "sex"=>"male", "height"=>"190", "weight"=>"60", "bmr"=>1586}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "chacha@chacha.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "age", "sex", "height", "weight", "created_at", "updated_at", "bmr") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "topopor1"], ["email", "chacha@chacha.com"], ["password_digest", "p1"], ["age", 32], ["sex", "male"], ["height", 190], ["weight", 60], ["created_at", "2020-02-13 18:51:21.026796"], ["updated_at", "2020-02-13 18:51:21.026796"], ["bmr", 1586.0]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mDay Load (0.6ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 5]]
+[active_model_serializers]   ↳ app/controllers/users_controller.rb:25:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (13.65ms)
+Completed 201 Created in 49ms (Views: 15.2ms | ActiveRecord: 6.3ms | Allocations: 13058)
+
+
+Started POST "/days/" for ::1 at 2020-02-13 18:51:21 +0000
+Processing by DaysController#create as JSON
+  Parameters: {"calories"=>1586, "user_id"=>5, "day"=>{"calories"=>1586, "user_id"=>5}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:21:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[36mDay Create (0.5ms)[0m  [1m[32mINSERT INTO "days" ("date", "calories", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["date", "2020-02-13"], ["calories", 1586.0], ["user_id", 5], ["created_at", "2020-02-13 18:51:21.124848"], ["updated_at", "2020-02-13 18:51:21.124848"]]
+  ↳ app/controllers/days_controller.rb:23:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/days_controller.rb:23:in `create'
+[active_model_serializers]   [1m[36mDay Load (0.3ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."user_id" = ?[0m  [["user_id", 5]]
+[active_model_serializers]   ↳ app/controllers/days_controller.rb:24:in `create'
+[active_model_serializers]   [1m[36mFood Load (0.2ms)[0m  [1m[34mSELECT "foods".* FROM "foods" WHERE "foods"."day_id" = ?[0m  [["day_id", 5]]
+[active_model_serializers]   ↳ app/controllers/days_controller.rb:24:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (16.38ms)
+Completed 201 Created in 68ms (Views: 16.2ms | ActiveRecord: 3.7ms | Allocations: 17264)
+
+
+Started POST "/foods/" for ::1 at 2020-02-13 18:51:37 +0000
+Processing by FoodsController#create as JSON
+  Parameters: {"name"=>"kk", "calories"=>"599", "day_id"=>5, "food"=>{"day_id"=>5, "name"=>"kk", "calories"=>"599"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/foods_controller.rb:20:in `create'
+  [1m[36mDay Load (0.4ms)[0m  [1m[34mSELECT "days".* FROM "days" WHERE "days"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/foods_controller.rb:20:in `create'
+  [1m[36mFood Create (1.6ms)[0m  [1m[32mINSERT INTO "foods" ("day_id", "name", "calories", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["day_id", 5], ["name", "kk"], ["calories", 599], ["created_at", "2020-02-13 18:51:37.437205"], ["updated_at", "2020-02-13 18:51:37.437205"]]
+  ↳ app/controllers/foods_controller.rb:20:in `create'
+  [1m[35m (3.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/foods_controller.rb:20:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Food (0.42ms)
+Completed 201 Created in 28ms (Views: 2.0ms | ActiveRecord: 5.9ms | Allocations: 7480)
+
+
